@@ -15,7 +15,7 @@ class YahooDailyReader():
         if end is None:
             end = datetime.datetime(2018,6,25)
         if start is None:
-            start = datetime.datetime(2010,1,1)
+            start = datetime.datetime(2000,1,1)
         
         self.start = start
         self.end = end
@@ -58,7 +58,7 @@ class YahooDailyReader():
         
 def save_kospi200_history(history_dir,yy,mm,dd):
     import datetime
-    kospi_list=pd.read_csv('kospi200.csv',sep='\t',engine='python') 
+    kospi_list=pd.read_csv('kospi200.csv',sep='\t',engine='python',header=None) 
     for kospi in kospi_list[:].values:
         ticker=kospi[0][:6]
         ydr = YahooDailyReader(ticker+'.KS',end=datetime.datetime(2018,mm,dd))
@@ -71,6 +71,6 @@ def save_kospi200_history(history_dir,yy,mm,dd):
             print('######'+ticker+'is not avaible######' )
         #time.sleep(0.1)
     
-if (__name__=="__name__"):
-    save_kospi200_history(6,29)
+if (__name__=="__main__"):
+    save_kospi200_history('./stock/kospi200_3',2018,6,29)
     
